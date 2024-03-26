@@ -1,0 +1,9 @@
+{% if latest_tab_list %}
+    <ul>
+    {% for tab in latest_tab_list %}
+    <li><a href="{% url 'mytabs:detail' tab.id %}">{{ tab.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tabs are available.</p>
+{% endif %}

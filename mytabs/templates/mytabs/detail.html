@@ -1,0 +1,149 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="{% static 'mytabs/javaScript/script.js' %}"></script>
+    <script src="{% static 'mytabs/javaScript/div.prod.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'mytabs/styleSheets/viewingStyle.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'mytabs/styleSheets/styleSideBar.css' %}" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheet Music Site</title>
+</head>
+
+<body>
+   
+    <div id="main">
+        
+        <div class="viewGridContainer">
+            <button id="sideBarButton" class="openbtn" onclick="sideBarNav()">☰</button>
+            <button onclick="location.href='/mytabs/account'" type="button" class="viewLittleButton">
+                <img src="{% static 'mytabs/images/humanSillhouette.png' %}" style="width: 35px; height: 35px;"></button>
+            <button onclick="javascript:history.back()" type="button" class="viewLittleButton"><-</button>
+                
+                {% if request.user.is_authenticated %}
+       
+                <form method="post" action="{% url 'mytabs:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="viewLittleButton">logout</button>
+                </form>
+                
+                {% endif%}
+            <div id="viewFavouritingButton" style="background-color: yellow;"></div>
+            <div id="viewBanner" style="background-color: green; margin-bottom: 15px;">{{ tab.name }}</div>
+        </div>
+        
+        <div style="background-color: #c2edde; border-radius: 15px;" class="vextab-auto" width=680 scale=1.0 editor="false"
+            editor-width=680 editor-height=330>
+            
+            options space=10 width=1500
+            tab-stems=true tab-stem-direction=up
+            <!-- tabstave notation=false  -->
+            {% for n in tab.notelist.notes%}
+            
+            tabstave key=A time=4/4
+            notes {{n}}
+            {% endfor %}
+            <!-- key=A time=4/4 -->
+            <!-- notes {{tab.notes}} -->
+            <!-- tabstave -->
+            <!-- notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :q p5/4 -->
+            
+
+            <!-- notes :q =|: (5/2.5/3.7/4) :8 7-5h6/3 ^3^ 5h6-7/5 ^3^ :q 7V/4 | 
+            notes :8 t12p7/4 s5s3/4 :8 3s:16:5-7/5 :h p5/4 -->
+            <!-- text :w, |#segno, ,|, :hd, , #tr -->
+
+            options space=25
+        </div>
+       
+    </div>
+
+    <div id="mySideBar" class="sideBar">
+        {% csrf_token %}
+        <div class="gridContainerSideBar">
+            <div id="searchBar" class="gridContainerSideBarTopLine" style="width: 385px; grid-column: 1/4; grid-row: 1;">
+                <form method="get" >
+                {% comment %} <p>searchBar</p>   {% endcomment %}
+                {{myFilter.form.as_p}} <button class="btn-primary" type="submit">Search</button> 
+                </form>
+            </div>
+            <div id="filterDropDown" class="gridContainerSideBarTopLine" style="width: 50px; grid-column: 4; grid-row: 1;">
+                <p>filter</p>
+            </div>
+            
+                <div id="searchResults">
+                    
+                    <form method="get">
+                        
+                            {% comment %} {{myFilter.form.as_p}}
+
+                            <button class="btn-primary" type="submit">Search</button> {% endcomment %}
+                            
+                            {% comment %} {{myFilter.form.as_p}} {% endcomment %}
+                            <p>All Tabs</p>
+                            <ul>
+                                {% for tab in atabs %}
+                                <li>{{ tab.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            <p>Search Results</p>
+                            <ul>
+                            {% for obj in myFilter.qs %}
+                                {% comment %} {{ obj.name}} {{ obj.id}}<br /> {% endcomment %}
+                                {% comment %} <li onclick=openDetails();> </li> {% endcomment %}
+                                <li onclick=openDetails();><a href="{% url 'mytabs:detail' obj.id %}">{{ obj.name }}</a></li>
+                                {% comment %} <li><a href="{% url 'mytabs:search' obj.id %}">{{ obj.name }}</a></li> {% endcomment %}
+                            {% endfor %}
+                            </ul>
+                            {{atabs.form.as_p}}
+
+                            
+                        </form>
+                
+                </div>
+            
+        </div>
+        
+    </div>
+    <script> 
+        function openDetails(url){
+            console.log('URL')
+            if (typeof(Storage) !== "undefined") {
+                console.log("closing")
+                // Save the state of the sidebar as "open"
+                localStorage.setItem("sidebar", "closed");
+            }else{
+                console.log("no storage")
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        // If localStorage is supported by the browser
+        if (typeof(Storage) !== "undefined") {
+            // If we need to open the bar
+            if(localStorage.getItem("sidebar") == "opened"){
+                console.log("we should be open")
+                // Remove class with transition from the 'sidebar' and the 'main'
+                
+                // Open the bar
+                document.getElementById("mySideBar").style.width = "500px";
+                document.getElementById("main").style.marginLeft = "500px";
+                // Add the transition class again
+                
+            } else {
+                document.getElementById("mySideBar").style.width = "0px";
+                document.getElementById("main").style.marginLeft = "0px";
+            }
+        
+        }
+    </script>
+</body>
+
+</html>
+<script>
+    console.log("tail script")
+    const tname = '{{tab.notelist}}'
+    console.log('{{tab.name}}')
+</script>

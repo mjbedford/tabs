@@ -1,0 +1,116 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{% static 'mytabs/styleSheets/style.css' %}" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheet Music Site</title>
+    <style>
+        .info {
+            padding: 10px;
+            background: blue;
+        }
+
+        .success {
+            padding: 10px;
+            background: blue;
+            margin: 20px;
+            color: white;
+        }
+
+        .error {
+            padding: 10px;
+            background: red;
+
+        }
+
+        .usererror {
+            margin: 20px;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+	<div>
+	<form action="/mytabs/" method="POST">
+            {% csrf_token %}
+    <div class="centerGridContainer">
+        
+
+            <div style="grid-column: 1/3; grid-row: 1;">
+                <h1>Login</h1>
+            </div>
+
+            <div class="centerGridItemLoginPage" style="grid-column: 1/3; grid-row: 2;">
+                <label>
+                    Username
+                </label>
+                <input type="text" name="username" id="username" placeholder="Enter your Username"></input>
+            </div>
+
+            <div class="centerGridItemLoginPage" style="grid-column: 1/3; grid-row: 3;">
+                <label>
+                    Password
+                </label>
+                <input type="password" name="pass1" id="pass1" placeholder="Enter your password"></input>
+            </div>
+
+            <div class="centerGridItemLoginPage" style="grid-column: 1/3; grid-row: 4;">
+                <button type="submit">Login</button>
+                <!-- <input type="button">Enter</input> -->
+            </div>
+
+            <div class="centerGridItemLoginPage"
+                style="grid-column: 1; grid-row: 5; width: 210px; margin:auto 15px auto 25px;">
+                <a href="signup">Signup Page</a>
+            </div>
+
+            <div class="centerGridItemLoginPage"
+                style="grid-column: 2; grid-row: 5; width: 210px; margin:auto 25px auto 15px;">
+				<input type="text" id="resetUserName" placeholder='Enter your username'></input>
+                {% comment %} <button onclick="location.href='passwordReset';">Reset my Password</button> {% endcomment %}
+				
+				<a href="passwordReset/" class="button-3" onclick="location.href=this.href+document.getElementById('resetUserName').value; return false;"> Reset Password </a>
+            </div>
+
+        
+        {% comment %} <form> {% endcomment %}
+            <!-- <div style="grid-column: 1/3; grid-row: 1;">
+                <h1>Reset</h1>
+            </div> -->
+            {% comment %} <div class="centerGridItemLoginPage"
+            style="grid-column: 2; grid-row: 5; width: 210px; margin:auto 25px auto 15px;">
+
+                <input type="text" id="resetUserName" placeholder='Enter your username'></input>
+                <button onclick="location.href='passwordReset';">Reset my Password</button>
+            </div>
+        </form> {% endcomment %}
+    </div>
+</form>
+
+</div>
+    {% if messages %}
+    {% for message in messages%}
+    <div class="{{message.tags}}">{{message}}</div>
+    {% endfor %}
+    {% endif %}
+</body>
+<script>
+    function resetPasswd() {
+		username = document.getElementById("resetUserName").value
+        console.log(username)
+		if (typeof(Storage) !== "undefined") {
+			console.log("storing username")
+			// Save the state of the sidebar as "open"
+			localStorage.setItem("username", username);
+		}else{
+			console.log("no storage")
+		}
+    }
+</script>
+
+</html>

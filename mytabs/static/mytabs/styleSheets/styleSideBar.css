@@ -1,0 +1,92 @@
+div{
+	box-sizing: border-box;
+}
+
+.sideBar{
+	height: 100%;
+	width: 0px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+.sideBar a{
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.sideBar a:hover{
+	color: #f1f1f1;
+}
+
+.sideBar .closebtn{
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+.openbtn{
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #7cf2c7;
+	color: white;
+	padding: 5px;
+	margin: 5px;
+	border-color: #7cf2c7;
+	border-radius: 5px;
+}
+
+.openbtn:hover{
+	background-color: #7cf2c7a6;
+}
+
+#main{
+	transition: margin-left .5s;
+	padding: 15px;
+}
+
+.gridContainerSideBar{
+	width: 95%;
+	height: 95%;
+	position: absolute;
+	top: 2.5%;
+	left: 2.5%;
+	background-color: purple;
+	border-radius: 5px;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+}
+
+.gridContainerSideBarTopLine{
+	height: 100px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 5px;
+	background-color: crimson;
+}
+
+#searchResults{
+	width: 455px;
+	height: 780px;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 5px;
+	background-color: green;
+	grid-column: 1/5;
+	grid-row: 2;
+}

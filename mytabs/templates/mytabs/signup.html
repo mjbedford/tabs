@@ -1,0 +1,76 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="{% static 'mytabs/styleSheets/style.css' %}" type="text/css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sheet Music Site</title>
+	<style>
+		.info {
+			padding: 10px;
+			background: blue;
+		}
+		.success {
+			padding: 10px;
+			background: blue;
+		}
+		.error {
+			padding: 10px;
+			background: red;
+
+		}
+		.usererror {
+			margin: 20px;
+			color: white;
+
+		}
+	</style>
+</head>
+
+<body>
+	<form action="/mytabs/signup" method="post">
+		{% csrf_token %}
+		<div class="centerGridContainer">
+			<div style="grid-column: 1/3; grid-row: 1;">
+				<h1>Signup</h1>
+			</div>
+
+			<div class="centerGridItemSignupPage" style="grid-column: 1/3; grid-row: 2;">
+				<label>User Name</label>
+				<input type="text" name="username" id="username" placeholder="Create a Username"></input>
+			</div>
+
+			<div class="centerGridItemSignupPage" style="grid-column: 1/3; grid-row: 3;">
+				<label>Email</label>
+				<input type="email" name="email" id="email" placeholder="Enter an email address"></input>
+			</div>
+
+			<div class="centerGridItemSignupPage" style="grid-column: 1/3; grid-row: 4;">
+				<label>Password</label>
+				<input type="password" name="pass1" id="pass1" placeholder="Enter a password"></input>
+			</div>
+
+			<div class="centerGridItemSignupPage" style="grid-column: 1/3; grid-row: 5;">
+				<label>Password Repeat</label>
+				<input type="password" name="pass2" id="pass2" placeholder="Confirm your password"></input>
+			</div>
+
+			<div class="centerGridItemSignupPage" style="grid-column: 1; grid-row: 6; width: 210px; margin:auto 15px auto 25px;">
+				<a href="/mytabs/">Login Page</a>
+			</div>
+
+			<div class="centerGridItemSignupPage" style="grid-column: 2; grid-row: 6; width: 210px; margin:auto 25px auto 15px;">
+				<button type="submit">Sign Up</button>
+			</div>
+		</div>
+	</form>
+	{% if messages %}
+		{% for message in messages%}
+				<div class="{{message.tags}}">{{message}}</div>
+		{% endfor %}
+	{% endif %}
+</body>
+
+</html>

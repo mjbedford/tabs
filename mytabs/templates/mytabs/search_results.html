@@ -1,0 +1,27 @@
+<br>
+	<div class="row collapse {% if show_form %} show  {% endif %}" id="form-holder">
+		<div class="row">
+			<div class="col">
+				<div class="card card-body">
+
+					<form method="get">
+						{{myFilter.form.as_p}}
+                        <ul>
+                            {% for tab in atabs %}
+                            <li><a href="{% url 'mytabs:detail' tab.id %}">{{ tab.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        {% for obj in myFilter.qs %}
+                            {{ obj.name }} <br />
+                        {% endfor %}
+                       
+                        {% comment %} {{atabs.form.as_p}} {% endcomment %}
+
+						<button class="btn-primary" type="submit">Search</button>
+					</form>
+                    
+				</div>
+			</div>
+		</div>
+	</div>
+</br>
