@@ -80,15 +80,37 @@ def signup(request):
         myuser.profile.securityQuestion3 = 'To be set by user'
         myuser.profile.save()
         messages.success( request, "Your Account has been created")
-        # messages.error(request, "Username or Password not correct!", extra_tags="usererror")
-        return redirect('/mytabs/')
-
+        user = authenticate(username=username, password=pass1)
+        auth_login(request,user)
+        messages.success(request, "Your account has been created")
+        context = {'newuser': myuser}
+        return redirect('/mytabs/qualityoflife', context)
+        #return render(request, "mytabs/qualityoflife.html", context)
         
     return render(request, "mytabs/signup.html")
 
 # Account page
 def account(request):
-    return render(request, "mytabs/account.html")
+    u = User.objects.get(id=request.user.id)
+    profile = u.profile
+    context = {'profile': profile}
+    if request.method=='POST':
+        gs1 = request.POST.get('gs1')
+        gs2 = request.POST.get('gs2')
+        gs3 = request.POST.get('gs3')
+        exps1 = request.POST.get('exps1')
+        print(gs1)
+        print(gs2)
+        print(gs3)
+        print(exps1)
+
+        u.profile.genre1 = gs1
+        u.profile.genre2 = gs2
+        u.profile.genre3 = gs3
+        u.profile.experienceLevel = exps1
+
+        u.profile.save()
+    return render(request, "mytabs/account.html", context)
 
 # Main details page
 def detail(request):
@@ -149,12 +171,39 @@ def passwordReset(request, name):
         return render(request, "mytabs/passwordReset.html", context)
 
 # Quality of Life page
-def qualityoflife(request):
-    return render(request, "mytabs/qualityoflife.html")
+def qualityoflife(request ):
+    # get user and security Q&A from authencation
+    u = User.objects.get(id=request.user.id)
+    #u = User.objects.get(username=name)
+    profile = u.profile
+    print('QofL User')
+    print(request.user.id)
+    context = {'profile': profile}
+    if request.method=='POST':
+        gs1 = request.POST.get('gs1')
+        gs2 = request.POST.get('gs2')
+        gs3 = request.POST.get('gs3')
+        exps1 = request.POST.get('exps1')
+        print(gs1)
+        print(gs2)
+        print(gs3)
+        print(exps1)
+        u.profile.genre1 = gs1
+        u.profile.genre2 = gs2
+        u.profile.genre3 = gs3
+        u.profile.experienceLevel = exps1
+
+        u.profile.save()
+        return redirect( "mytabs:securityQuestions")
+        #return render(request, "mytabs/securityQuestions.html", context)
+
+    return render(request, "mytabs/qualityoflife.html", context)
+
 
 # set security questions and answers
 def securityQuestions(request):
     # get user and security Q&A from authencation
+        print('securityQuestions')
         u = User.objects.get(id=request.user.id)
         secq = {"option":[{"key": 1, "string": u.profile.securityQuestion1},
                          {"key": 2, "string": u.profile.securityQuestion2},
@@ -181,7 +230,8 @@ def securityQuestions(request):
             
             print(2)
             u.save()
-            return render(request, "mytabs/account.html")
+            return redirect( "mytabs:search")
+            #return render(request, "mytabs/account.html")
         else:
         # redirect to acount page
             context = { "user": u,  "answers": seca, "questions": secq}

@@ -8,15 +8,48 @@
     <title>Sheet Music Site</title>
 </head>
 <body>
+    <form action="/mytabs/qualityoflife" method="POST">
+        {% csrf_token %}
     <div class="centerGridContainer">
         <div style="grid-column: 1/3; grid-row: 1;"><h1>Quality of Life</h1></div>
 
         <div class="centerGridItemQualityOfLife" style="grid-column: 1/3; grid-row: 2;">
-            <label><h3>Genres</h3></label>
+            <label>Genres</label>
+            <select name="gs1" id="gs1">
+                <option value="None" selected disabled hidden>Select an Option</option> 
+                <option value="Jazz" {% if profile.genre1 == 'Jazz' %}selected{% endif %}>Jazz</option>
+                <option value="Rock" {% if profile.genre1 == 'Rock' %}selected{% endif %}>Rock</option>
+                <option value="Metal" {% if profile.genre1 == 'Metal' %}selected{% endif %}>Metal</option>
+                <option value="Classical" {% if profile.genre1 == 'Classical' %}selected{% endif %}>Classical</option>
+            </select>
+            <select name="gs2" id="gs2">
+                <option value="None" selected disabled hidden>Select an Option</option> 
+                <option value="Jazz" {% if profile.genre2 == 'Jazz' %}selected{% endif %}>Jazz</option>
+                <option value="Rock" {% if profile.genre2 == 'Rock' %}selected{% endif %}>Rock</option>
+                <option value="Metal" {% if profile.genre2 == 'Metal' %}selected{% endif %}>Metal</option>
+                <option value="Classical" {% if profile.genre2 == 'Classical' %}selected{% endif %}>Classical</option>
+            </select>
+            <select name="gs3" id="gs3">
+                <option value="None" selected disabled hidden>Select an Option</option> 
+                <option value="Jazz" {% if profile.genre3 == 'Jazz' %}selected{% endif %}>Jazz</option>
+                <option value="Rock" {% if profile.genre3 == 'Rock' %}selected{% endif %}>Rock</option>
+                <option value="Metal" {% if profile.genre3 == 'Metal' %}selected{% endif %}>Metal</option>
+                <option value="Classical" {% if profile.genre3 == 'Classical' %}selected{% endif %}>Classical</option>
+            </select>
+           
         </div>
 
         <div class="centerGridItemQualityOfLife" style="grid-column: 1/3; grid-row: 3;">
             <label><h3>Experience Level</h3></label>
+            <select name="exps1" id="exps1">
+                <option value="None" selected disabled hidden>Select an Option</option> 
+                <option value="Beginner" {% if profile.experienceLevel == 'Beginner' %}selected{% endif %}>Beginner</option>
+                <option value="Intermediate" {% if profile.experienceLevel == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+                <option value="Expert" {% if profile.experienceLevel == 'Expert' %}selected{% endif %}>Expert</option>
+               
+            </select>
+           
+            
         </div>
 
         <div class="centerGridItemQualityOfLife" style="grid-column: 1; grid-row: 4; height: 50px; width: 210px; margin:auto 15px auto 25px;">
@@ -24,7 +57,7 @@
         </div>
         
         <div class="centerGridItemQualityOfLife" style="grid-column: 2; grid-row: 4; height: 50px; width: 210px; margin:auto 25px auto 15px;">
-            <input type="button">Enter</input>
+            <button type="submit">Save</button>
         </div>
     </div>
 </body>
