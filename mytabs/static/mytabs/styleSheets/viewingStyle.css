@@ -13,6 +13,14 @@ h1{
 	text-align: center;
 }
 
+#tabLinks{
+	color: #111111;
+}
+
+#tabLinks:hover{
+	color: #656565;
+}
+
 .viewGridContainer{
 	width: 100%;
 	display: inline-flex;
@@ -28,7 +36,6 @@ h1{
 	margin: 5px;
 	border-color: #7cf2c7;
 	border-radius: 5px;
-    margin-right: 100px;
 }
 
 .viewLittleButton:hover{
@@ -59,3 +66,4 @@ h1{
 	padding: 15px;
 	border-radius: 15px;
 }
+

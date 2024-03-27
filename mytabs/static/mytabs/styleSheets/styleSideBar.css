@@ -64,7 +64,7 @@ div{
 	position: absolute;
 	top: 2.5%;
 	left: 2.5%;
-	background-color: purple;
+	background-color: #111;
 	border-radius: 5px;
 	display: grid;
 	grid-template-columns: auto auto auto auto;
@@ -76,7 +76,7 @@ div{
 	margin-left: 10px;
 	margin-right: 10px;
 	border-radius: 5px;
-	background-color: crimson;
+	background-color: #7cf2c7;
 }
 
 #searchResults{
@@ -86,7 +86,7 @@ div{
 	margin-left: 10px;
 	margin-right: 10px;
 	border-radius: 5px;
-	background-color: green;
+	background-color: #c2edde;
 	grid-column: 1/5;
 	grid-row: 2;
 }

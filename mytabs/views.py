@@ -11,7 +11,7 @@ from django.contrib import messages
 
 from mytabs.filters import TabFilter
 
-from.models import Tab, UserProfile
+from.models import Tab, UserProfile, Favourite
 
 import re
 
@@ -33,6 +33,7 @@ def login(request):
             auth_login(request,user)
             print("logged in")
             # return render(request, "mytabs/index.html")
+            
             return redirect( "mytabs:search")
         else:
             print("Bad Credentials")
@@ -263,7 +264,20 @@ def search_tabs(request):
     print('search tabs')
     # sets context for side bar, context contains the full list and the filtered list to be displayed in sidebar
     context = {"tabs": tabs, "myFilter": myFilter, "atabs": atabs}
+    if request.method == "POST":
+        print('search_tabs post')
+        print(request.POST.get('ctab'))
+        ftab = Tab.objects.get(id=request.POST.get('ctab'))
+        print(ftab.id)
+        u = User.objects.get(id=request.user.id)
+        print(1)
+        # favourite =  Favourite.objects.create(user=u , tabId=ftab)
+        print(2)
+        # u.favourite.tabId = ftab
+        messages.success(request, "This tab has been added to your favourites")
+        # u.favourite.save()
     return render(request, "mytabs/detail.html", context)
+
 
 # not used
 def search_tabs2(request):

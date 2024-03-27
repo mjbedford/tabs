@@ -1,0 +1,51 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{% static 'mytabs/styleSheets/style.css' %}" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheet Music Site</title>
+    <style>
+        .info {
+            padding: 10px;
+            background: blue;
+        }
+
+        .success {
+            padding: 10px;
+            background: blue;
+            margin: 20px;
+            color: white;
+        }
+
+        .error {
+            padding: 10px;
+            background: red;
+
+        }
+
+        .usererror {
+            margin: 20px;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+	<div>
+	<form action="/mytabs/" method="POST">
+            {% csrf_token %}
+        filters
+        {% for tab in atabs %}
+            <input type="checkbox" id={{ tab.name }} name={{ tab.name }} value={{ tab.name }}>
+            <label for="{{ tab.name }}"> {{ tab.name }}</label><br>
+        {% endfor %}   
+            <input type="submit" value="Submit">
+                
+    </form>
+</div>
+</body>
+</html>
