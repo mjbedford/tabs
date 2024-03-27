@@ -28,3 +28,7 @@ class UserProfile(models.Model):
     securityAnswer2 = models.CharField(max_length=100)
     securityQuestion3 = models.CharField(max_length=100)
     securityAnswer3 = models.CharField(max_length=100)
+    genre1 = models.CharField(max_length=20)
+    genre2 = models.CharField(max_length=20)
+    genre2 = models.CharField(max_length=20)
+    experienceLevel = models.CharField(max_length=30)
