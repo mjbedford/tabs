@@ -37,11 +37,15 @@
                 <form method='post' action="{% url 'mytabs:search' %}">
                     {% csrf_token %}
                     <input type='hidden' name='ctab' name#'ctab' value={{tab.id}}></input>
+                    {% comment %} thIS IS THE SEARCH BUTTON WE COULD NOT FIND IT CALL SERARCH URL {% endcomment %}
                     <button type="submit" class="viewLittleButton">
                         <img src="{% static 'mytabs/images/favourite.png' %}" style="width: 35px; height: 35px;">
                     </button>
                 </form> 
-            <div id="viewBanner" style="background-color: green; margin-bottom: 15px;">{{ tab.name }}</div>
+            <div id="viewBanner" style="background-color: green; margin-bottom: 15px;">
+                <p><h1>{{ tab.name }}</h1></p>
+
+                </div>
         </div>
         
         <div style="background-color: #c2edde; border-radius: 15px;" class="vextab-auto" width=680 scale=1.0 editor="false"
@@ -70,6 +74,7 @@
        
     </div>
 
+{% comment %} Search Bar Starts here {% endcomment %}
     <div id="mySideBar" class="sideBar">
         {% csrf_token %}
         <div class="gridContainerSideBar">

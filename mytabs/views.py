@@ -268,8 +268,9 @@ def search_tabs(request):
         print('search_tabs post')
         print(request.POST.get('ctab'))
         ftab = Tab.objects.get(id=request.POST.get('ctab'))
-        print(ftab.id)
-        u = User.objects.get(id=request.user.id)
+        if ftab != None:
+            print(ftab.id)  
+            u = User.objects.get(id=request.user.id)
         print(1)
         # favourite =  Favourite.objects.create(user=u , tabId=ftab)
         print(2)
